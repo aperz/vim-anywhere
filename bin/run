@@ -59,9 +59,9 @@ touch $TMPFILE
 if [[ $OSTYPE == "linux-gnu" ]]; then
   chmod o-r $TMPFILE # Make file only readable by you
   if [[ $USE_UXTERM ]]; then
-    uxterm -e vim $VIM_OPTS $TMPFILE
+    uxterm -e vim -c 'startinsert' $VIM_OPTS $TMPFILE
   else
-    gvim $VIM_OPTS $TMPFILE
+    gvim -c 'startinsert' $VIM_OPTS $TMPFILE
   fi
   cat $TMPFILE | xclip -selection clipboard
 
