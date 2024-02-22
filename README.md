@@ -64,6 +64,23 @@ $ echo 'bindsym $mod+Alt+v exec ~/.vim-anywhere/bin/run' >> ~/.i3/config # remem
 ```
 Adjust in case `$mod` is not set to ctrl.
 
+
+*AwesomeWM*
+
+Add the following to your rc.lua file, after the globalkeys section:
+
+```lua
+globalkeys = gears.table.join(
+    globalkeys,
+    -- Add a custom keybinding for vim-anywhere
+    awful.key({ modkey,"Control" }, "v", function ()
+        awful.spawn(string.format("~/.vim-anywhere/bin/run", os.getenv("HOME")))
+    end, {description = "launch vim-anywhere", group = "custom"})
+)
+```
+
+
+
 ## History
 
 vim-anywhere creates a temporary file in `/tmp/vim-anywhere` when invoked. These
