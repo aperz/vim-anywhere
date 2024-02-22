@@ -24,12 +24,14 @@ require_file_exists() {
 # opts
 ###
 
-while getopts ":v" opt; do
+while getopts ":vt" opt; do
   case "$opt" in
     v) set -x ;;
+    t) USE_UXTERM=true ;;
     \?) echo "Invalid option: -$OPTARG" >&2 ;;
   esac
 done
+echo $TERM
 
 ###
 # run
@@ -56,7 +58,11 @@ touch $TMPFILE
 # Linux
 if [[ $OSTYPE == "linux-gnu" ]]; then
   chmod o-r $TMPFILE # Make file only readable by you
-  gvim $VIM_OPTS $TMPFILE
+  if [[ $USE_UXTERM ]]; then
+    uxterm -e vim $VIM_OPTS $TMPFILE
+  else
+    gvim $VIM_OPTS $TMPFILE
+  fi
   cat $TMPFILE | xclip -selection clipboard
 
 # OSX
