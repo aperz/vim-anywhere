@@ -78,7 +78,9 @@ globalkeys = gears.table.join(
     end, {description = "launch vim-anywhere", group = "custom"})
 )
 ```
+## Run options
 
+`-t` open Vim with a terminal emulator instead of GVim
 
 
 ## History
